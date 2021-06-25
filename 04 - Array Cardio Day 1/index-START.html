@@ -37,9 +37,28 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+     //There are several ways of doing this
+     const firstwayfifteen=inventors.filter(function(inventor){
+       if(inventor.year>=1500 && inventor.year<=1599){
+         console.log(`Inventor ${inventor.first} ${inventor.last} was born in the 1500s, in ${inventor.year}`);
+         return true; //keeps it, no need to specify an if else for false
+       }
+     });
+     //As the function returns true, we can also output the results this way
+     console.table(firstwayfifteen);
+
+     //Simplified function, the statements return true so we can log as normal
+          const secondwayfifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year <= 1599));
+          console.table(secondwayfifteen);
+  
+          
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const firstwaynames = inventors.filter(function (inventor) {
+
+    });
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
