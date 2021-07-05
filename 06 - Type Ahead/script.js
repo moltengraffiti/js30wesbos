@@ -22,6 +22,34 @@ fetch(endpoint)
     
 //console.log(cities);
     
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('change', displayMatches);
+
+function displayMatches() {
+   // console.log(this.value);
+    const matchArray = findMatches(this.value, cities);
+    console.log(matchArray);
+
+    const htmlList = matchArray.map(place => {
+//we want to highlight the matching found text, se we replace the 
+//found string with a class highlighted string of the entered text
+    const regex = new RegExp(this.value, 'gi');
+    const foundCity = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+       const foundState = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+
+    
+        return ` 
+        <li>
+        <span class ="name"> ${foundCity}, ${foundState}</span> 
+        </li>`
+    }).join('')
+    suggestions.innerHTML = htmlList;
+}
+
 //find what's typed and filter the list
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
@@ -33,16 +61,6 @@ function findMatches(wordToMatch, cities) {
     
 }
 
-function displayMatches() {
-    console.log(this.value);
-    
-}
-
-const searchInput = document.querySelector('.search');
-const suggestions = document.querySelector('.suggestions');
-
-searchInput.addEventListener('keyup', displayMatches);
-searchInput.addEventListener('change', displayMatches);
 
 
 //Not suitable due to THIS
